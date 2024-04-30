@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>BioCro</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">BioCro</h1>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>BioCro is a model that predicts plant growth over time given
+crop-specific parameters and environmental data as input.</p>
+<p>It uses models of key physiological and biophysical processes
+underlying plant growth, and has previously been used for predicting
+biomass yield and leaf area index of switchgrass and miscanthus. In
+2022, BioCro was reorganized to take a truly modular approach to
+modeling and a new soybean model was developed.</p>
+</div>
+<div id="an-example" class="section level2">
+<h2>An example</h2>
+<p>The <code>run_biocro()</code> function accepts initial values,
+parameters, climate variables, and sets of modules to run. It returns
+the results in a data frame.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(BioCro)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">with</span>(soybean, {<span class="fu">run_biocro</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  initial_values,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  parameters,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  soybean_weather<span class="sc">$</span><span class="st">&#39;2002&#39;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  direct_modules,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  differential_modules,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  ode_solver</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>)})</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">xyplot</span>(Stem <span class="sc">+</span> Leaf <span class="sc">~</span> TTc, <span class="at">data =</span> result, <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">auto =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>There are parameters and modules for soybean (<em>Glycine max</em>),
+miscanthus (<em>Miscanthus</em> x <em>giganteus</em>), and willow
+(<em>Saliceae salix</em>).</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<p>The best place to get started with BioCro is the <a href="https://biocro.github.io">public BioCro Documentation web
+site</a>, which includes the following:</p>
+<ul>
+<li><p>Installation instructions</p></li>
+<li><p>A “Practical Guide to BioCro” and other articles in the
+“Articles” dropdown menu</p></li>
+<li><p>Documentation of the C++ code, including notes on the biological
+models used in BioCro, in the “C++ Library” dropdown menu</p></li>
+<li><p>Documentation for BioCro developers and maintainers in the
+“Developer’s Manual” dropdown menu</p></li>
+</ul>
+<p>There is also a separate <a href="https://biocro.github.io/BioCro-documentation/quantity_docs/quantities.html">page
+that documents all of the quantities used by the Standard BioCro Module
+Library</a>.</p>
+</div>
+<div id="license" class="section level2">
+<h2>License</h2>
+<p>The <code>BioCro</code> R package is licensed under the MIT license,
+while the BioCro C++ framework is licensed under version 3 or greater of
+the GNU Lesser General Public License (LGPL). This scheme allows people
+to freely develop models for any use (public or private) under the MIT
+license, but any changes to the framework that assembles and solves
+models must make source code changes available to all users under the
+LGPL. See <code>LICENSE.note</code> for more details.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
