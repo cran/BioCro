@@ -8,12 +8,20 @@
 # include <boost/config/workaround.hpp>
 # include <boost/concept/detail/backward_compatibility.hpp>
 
-namespace boost { namespace concepts { 
+namespace boost { namespace concepts {
 
 template <class Model>
 struct usage_requirements
 {
+#   if defined(BOOST_GCC) && (BOOST_GCC >= 110000)
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic\
+ ignored "-Wnonnull"
+#   endif
     ~usage_requirements() { ((Model*)0)->~Model(); }
+#   if defined(BOOST_GCC) && (BOOST_GCC >= 110000)
+#   pragma GCC diagnostic pop
+#   endif
 };
 
 #  if BOOST_WORKAROUND(__GNUC__, <= 3)

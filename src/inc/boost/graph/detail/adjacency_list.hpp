@@ -45,6 +45,12 @@
 #define BOOST_GRAPH_MOVE_IF_POSSIBLE(x) (std::move((x)))
 #endif
 
+#if defined(BOOST_GCC) && (BOOST_GCC >= 40700)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic\
+ ignored "-Wmaybe-uninitialized"
+#endif
+
 /*
   Outline for this file:
 
