@@ -1,6 +1,7 @@
 # Adding the Boost libraries
 
 ## Why this is needed
+
 BioCro uses software from the Boost C++ libraries. Boost does not assure
 backward compatibility, so changes to Boost could break BioCro. Thus, we don't
 want to link our code to a user supplied Boost installation, and we include a
@@ -11,6 +12,7 @@ document lists steps to extract the relevant parts and update files in BioCro to
 use them.
 
 ## How to extract parts of Boost
+
 Use the `bcp` tool included with Boost to extract parts of the Boost library.
 `bcp` accepts a list of files or modules and extracts the relevant parts of the
 Boost library to a directory.
@@ -49,32 +51,43 @@ operating systems without it. Hence the need for
 3. Check that the Boost license in `inc` is correct for the version used, and
    update the package `LICENSE` file if necessary.
 
-4. Update the path to the Boost license in the package `LICENSE` file.
-
-5. Run `R CMD check` and address any new warnings or errors related to the boost
+4. Run `R CMD check` and address any new warnings or errors related to the boost
    library. It is likely that the following issues will occur:
 
    - Some file paths will exceed the 100 character limit. Truncate any such file
      names, and be sure to update any associated `#include` directives that
      reference these files; otherwise, compilation errors will occur.
 
-   - As of boost version 1.83, some of the boost libraries included with BioCro
-     call `sprintf`, which is not allowed by CRAN. Replace any such instances of
-     `sprintf` with `snprintf`.
+     Note: BioCro module library packages are currently allowed to have names up
+     to twelve characters long. To accommodate this, temporarily change the
+     package name in the BioCro `DESCRIPTION` file to something with twelve
+     characters, such as `twelvecharac` before running `R CMD check`.
+
+     Historically, only two files have needed to be changed:
+
+     - `boost/numeric/odeint/stepper/generation/generation_controlled_adams_bashforth_moulton.hpp`
+       becomes
+       `boost/numeric/odeint/stepper/generation/generation_controlled_adams_bashfor.hpp`
+
+     - `boost/numeric/odeint/stepper/generation/generation_runge_kutta_cash_karp54_classic.hpp`
+       becomes
+       `boost/numeric/odeint/stepper/generation/generation_runge_kutta_cash_karp54_.hpp`
 
 ### Notes for using bcp in Windows
+
 First, follow the instructions in the "Getting Started on Windows"
-[Boost page](https://www.boost.org/doc/libs/1_71_0/more/getting_started/windows.html).
+[Boost page](https://www.boost.org/doc/libs/latest/more/getting_started/windows.html).
 
-For V1.71.0, this entails the following:
- - Install the Visual Studio 2019 Developer Command Prompt
-   ([see here](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=vs-2019)).
+This entails the following:
+ - Install the Visual Studio Developer Command Prompt (this comes as part of
+   Visual Studio, which can be obtained from
+   [Microsoft](https://visualstudio.microsoft.com/downloads/)).
 
- - Download the full Boost library, unzip it, and put it somewhere convenient:
-   e.g., `C:\Program Files\boost\boost_1_71_0`.
+ - Download the full Boost library, unzip it, and put it somewhere convenient,
+   such as `C:\Program Files\boost\boost_1_71_0`.
 
- - Open a VS developer prompt and cd into the boost root directory: e.g., cd
-   `C:\Program Files\boost\boost_1_71_0`.
+ - Open a VS developer prompt and move to the boost root directory; in this
+   example, it would be `C:\Program Files\boost\boost_1_71_0`.
 
  - Type `bootstrap` and press enter. This may take a minute or so to complete.
 
@@ -84,16 +97,18 @@ Now the Boost libraries have been built, and we are almost ready to use `bcp`.
 However, we need to explicitly build the `bcp` tool using the `Boost.Build`
 tool, which is cryptically named `b2.exe`.
 
- - In a VS developer prompt, cd into the tools/bcp directory: e.g.,
-   `cd C:\Program Files\boost\boost_1_71_0\tools\bcp`.
+ - In a VS developer prompt, move to the `tools/bcp` directory; in this example,
+   it would be `C:\Program Files\boost\boost_1_71_0\tools\bcp`.
 
- - Run b2.exe using its full path: e.g., type
-   `C:\"Program Files"\boost\boost_1_71_0\b2` and press enter.
+ - Run `b2.exe` using its full path; in this example, it would be
+   `C:\"Program Files"\boost\boost_1_71_0\b2`.
 
- - Now bcp.exe should be in `C:\Program Files\boost\boost_1_71_0\dist\bin`.
+ - Now `bcp.exe` should be in the `dist\bin` directory within the boost root
+   directory; in this example, it would be
+   `C:\Program Files\boost\boost_1_71_0\dist\bin`.
 
-Finally, cd into the folder that contains bcp: e.g.,
-`cd C:\Program Files\boost\boost_1_71_0\dist\bin`.
+Finally, move to the folder that contains `bcp`; in this example, it would be
+`C:\Program Files\boost\boost_1_71_0\dist\bin`.
 
 Now you should be able to run the command listed as "Step 1" above from a VS
 developer command prompt.

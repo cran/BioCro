@@ -24,12 +24,12 @@
 #include <boost/numeric/odeint/stepper/generation/generation_controlled_runge_kutta.hpp>
 #include <boost/numeric/odeint/stepper/generation/generation_dense_output_runge_kutta.hpp>
 
-#include <boost/numeric/odeint/stepper/generation/generation_runge_kutta_cash_karp54_classi.hpp>
+#include <boost/numeric/odeint/stepper/generation/generation_runge_kutta_cash_karp54_.hpp>
 #include <boost/numeric/odeint/stepper/generation/generation_runge_kutta_cash_karp54.hpp>
 #include <boost/numeric/odeint/stepper/generation/generation_runge_kutta_dopri5.hpp>
 #include <boost/numeric/odeint/stepper/generation/generation_runge_kutta_fehlberg78.hpp>
 
-#include <boost/numeric/odeint/stepper/generation/generation_controlled_adams_bashforth_mou.hpp>
+#include <boost/numeric/odeint/stepper/generation/generation_controlled_adams_bashfor.hpp>
 
 #include <boost/numeric/odeint/stepper/generation/generation_rosenbrock4.hpp>
 

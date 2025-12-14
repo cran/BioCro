@@ -27,6 +27,7 @@
 #include <boost/mpi/detail/mpi_datatype_cache.hpp>
 #include <boost/mpl/assert.hpp>
 #include <boost/archive/basic_archive.hpp>
+#include <boost/serialization/library_version_type.hpp>
 #include <boost/serialization/item_version_type.hpp>
 #include <utility> // for std::pair
 
@@ -80,7 +81,7 @@ struct is_mpi_logical_datatype
  *  complex MPI data type for a given C++ type.
  *
  *  This type trait determines when there is a direct mapping from a
- *  C++ type to an MPI data type that is classified as an complex data
+ *  C++ type to an MPI data type that is classified as a complex data
  *  type. See @c is_mpi_builtin_datatype for general information about
  *  built-in MPI data types.
  */
@@ -140,7 +141,7 @@ struct is_mpi_builtin_datatype
  *  be accessible via @c get_mpi_datatype.
 
  *  For any C++ type that maps to a built-in MPI data type (see @c
- *  is_mpi_builtin_datatype), @c is_mpi_data_type is trivially
+ *  is_mpi_builtin_datatype), @c is_mpi_datatype is trivially
  *  true. However, any POD ("Plain Old Data") type containing types
  *  that themselves can be represented by MPI data types can itself be
  *  represented as an MPI data type. For instance, a @c point3d class
@@ -210,6 +211,10 @@ BOOST_MPI_DATATYPE(packed, MPI_PACKED, builtin);
 
 /// INTERNAL ONLY
 BOOST_MPI_DATATYPE(char, MPI_CHAR, builtin);
+
+/// INTERNAL ONLY
+/// We need to pick a boolean type, MPI_CXX_BOOL seems appropriate
+BOOST_MPI_DATATYPE(bool, MPI_CXX_BOOL, logical);
 
 /// INTERNAL ONLY
 BOOST_MPI_DATATYPE(short, MPI_SHORT, integer);
@@ -316,35 +321,9 @@ BOOST_MPI_DATATYPE(signed char, MPI_SIGNED_CHAR, builtin);
 
 #endif // Doxygen
 
-namespace detail {
-  inline MPI_Datatype build_mpi_datatype_for_bool()
-  {
-    MPI_Datatype type;
-    MPI_Type_contiguous(sizeof(bool), MPI_BYTE, &type);
-    MPI_Type_commit(&type);
-    return type;
-  }
-}
-
-/// Support for bool. There is no corresponding MPI_BOOL.
-/// INTERNAL ONLY
-template<>
-inline MPI_Datatype get_mpi_datatype<bool>(const bool&)
-{
-  static MPI_Datatype type = detail::build_mpi_datatype_for_bool();
-  return type;
-}
-
-/// INTERNAL ONLY
-template<>
-struct is_mpi_datatype<bool>
-  : boost::mpl::bool_<true>
-{};
-
-
 #ifndef BOOST_MPI_DOXYGEN
 // direct support for special primitive data types of the serialization library
-BOOST_MPI_DATATYPE(boost::archive::library_version_type, get_mpi_datatype(uint_least16_t()), integer);
+BOOST_MPI_DATATYPE(boost::serialization::library_version_type, get_mpi_datatype(uint_least16_t()), integer);
 BOOST_MPI_DATATYPE(boost::archive::version_type, get_mpi_datatype(uint_least8_t()), integer);
 BOOST_MPI_DATATYPE(boost::archive::class_id_type, get_mpi_datatype(int_least16_t()), integer);
 BOOST_MPI_DATATYPE(boost::archive::class_id_reference_type, get_mpi_datatype(int_least16_t()), integer);
