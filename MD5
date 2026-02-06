@@ -1,8 +1,8 @@
-1be9fd5789899f1dc10f2133b6fa0fea *DESCRIPTION
+bc3ca135371dd210f1a5cc29a4fabb8f *DESCRIPTION
 02c340cdeb51a44ff84c8c5c3fbfa4bd *LICENSE
 17ecbca768ecfc4495b31f526bba3a97 *LICENSE.note
 9725371818a9cd24d3212fc2642e7842 *NAMESPACE
-7764e91a721a85ea163adb840cb4978a *NEWS.md
+d1e3b457d08d204536edbc9da0b2b925 *NEWS.md
 9e6c934fbb677ae3ab15f74b3cd0acc4 *R/add_time_to_weather_data.R
 ad494d28a47ab009b3beddd2bd114927 *R/framework_version.R
 80d5644ad0cbfb494cee84fca7ee5444 *R/function_from_package.R
@@ -38,8 +38,8 @@ f96d12058955cf1197b205f72af3928f *data/soil_parameters.rda
 8a3523415485d5a89829524fe00078ad *data/soybean_weather.rdata
 1bce125634eab537b544d8ecb495351a *data/willow.rda
 52eb5ad7bcf885c1dd9900b76686b314 *inst/CITATION
-78e2618b7928f716c14d4197c5569b8e *inst/doc/BioCro.R
-661927789f14a150f431921d3bdd6129 *inst/doc/BioCro.Rmd
+f2719cba8733afafe8df828e1fa5c85c *inst/doc/BioCro.R
+f78e751cf1e671248bf003c76db1d681 *inst/doc/BioCro.Rmd
 f8d956c0afb734d4a108595a7dabcfcb *inst/doc/BioCro.html
 1dc6a9e8f67cca3475cc0da93ad5bad7 *inst/extdata/get_soybean_weather_data.R
 23ccc0ed8ea42563e9fe718f817cf311 *inst/extdata/parameterize_soybean.R
@@ -79,7 +79,7 @@ e419973b4f9fa5debe00852e11da0a15 *man/test_module.Rd
 6528855f4f1fd3a52fddda270c8ac298 *man/time_variable.rd
 db8a81626262fbe6ae69e97bfc8c4ee3 *man/update_stored_model_results.Rd
 5166fcbd15ea7fe86e934317ae6e90dc *man/willow.Rd
-6352fe1b0fb5afb1e90e23a702a8316e *src/Makevars
+a85332c8fd28cf15211c7e101b616b81 *src/Makevars
 68313ca0627a7f3960518e8410754003 *src/R_dynamical_system.cpp
 b1624fb1de395181ae1462ec33efba21 *src/R_dynamical_system.h
 4819ec203feaaf018a0cde7964e8c3f9 *src/R_framework_version.cpp
@@ -3843,9 +3843,8 @@ b526c41eaf3162f2629ca1bad997a02c *src/inc/boost/version.hpp
 61108cfe1e8bd3ae15c893600d38907d *src/inc/boost/visit_each.hpp
 d638c286cdf56a82f1d15f31f39fb11f *src/inc/boost/weak_ptr.hpp
 4ba864840261b9d4f9ddec1838494476 *src/init.cpp
-a64c6d0efc784f8e16245e8089927165 *src/math/roots/multidim/broyden.h
-3dca102fae3d860ae08cedcee2848796 *src/math/roots/multidim/broyden_method.h
-ded00737b8f20162dbc88c2229d4a8a2 *src/math/roots/multidim/zeros.h
+86cad858f68bb0501aa4892461587121 *src/math/roots/multidim/broyden.h
+9425c29770e1f3d003050a5788ef0d9a *src/math/roots/multidim/zeros.h
 ec29b7e4f076fb797be0ba779574fe83 *src/math/roots/onedim/anderson_bjorck.h
 df786b590507b1c7a041eb8dc7d25711 *src/math/roots/onedim/bisection.h
 4a99471a8b00aaea7389ff997153dfe5 *src/math/roots/onedim/dekker.h
@@ -3875,7 +3874,7 @@ d849d16e06574b64fc9ec47a56304019 *src/module_library/ball_berry_gs.h
 6d7a63e50af3e9cf323c2819c940a694 *src/module_library/biomass_leaf_n_limitation.h
 685f86f8addefb04d9acfcd37258cdae *src/module_library/boundary_layer_conductance.cpp
 ace5a00642b93076abe1644fcd0b1719 *src/module_library/boundary_layer_conductance.h
-c01955b14560ad4bf43382659ef39d56 *src/module_library/broyden_test.h
+7de352794343549567f1b856c30e8c20 *src/module_library/broyden_test.h
 25b5995e8000c1677868770c9f2b1c08 *src/module_library/buck_swvp.h
 2f811ad5bbe36057f6aa7c8d5a72d282 *src/module_library/bucket_soil_drainage.h
 95361b64ca2b53d1d1747f0034b095c2 *src/module_library/c3CanAC.cpp
@@ -4139,5 +4138,5 @@ cc53dc952ea43f1e43c6e0864fa7288f *tests/testthat/test.model_testing.R
 3783d49ba5ec45eb9573e45f25a7a362 *tests/testthat/test.relative_humidity.R
 8b6e140f8b7c71094d9420fa48198356 *tests/testthat/test.time_format.R
 7614727099625829a201b6831d3729a4 *tests/testthat/test.weather.R
-661927789f14a150f431921d3bdd6129 *vignettes/BioCro.Rmd
+f78e751cf1e671248bf003c76db1d681 *vignettes/BioCro.Rmd
 8800a08a52d2a2c450d9f814789cf396 *vignettes/building_the_vignettes.md
