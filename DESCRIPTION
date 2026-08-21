@@ -1,6 +1,6 @@
 Package: BioCro
-Version: 3.3.1
-Date: 2026-02-06
+Version: 3.4.0
+Date: 2026-08-20
 Title: Modular Crop Growth Simulations
 Description: A cross-platform representation of models as sets of equations
     that facilitates modularity in model building and allows users to harness
@@ -46,7 +46,7 @@ ByteCompile: TRUE
 URL: https://github.com/biocro/biocro, https://biocro.org
 Config/testthat/edition: 3
 NeedsCompilation: yes
-Packaged: 2026-02-06 16:38:39 UTC; Justin
+Packaged: 2026-08-21 13:42:17 UTC; Justin
 Author: Justin M. McGrath [cre, aut] (ORCID:
     <https://orcid.org/0000-0002-7025-3906>),
   Edward B. Lochocki [aut] (ORCID:
@@ -66,4 +66,4 @@ Author: Justin M. McGrath [cre, aut] (ORCID:
   Boost Organization [cph] (Copyright holder of included Boost library)
 Maintainer: Justin M. McGrath <jmcgrath@illinois.edu>
 Repository: CRAN
-Date/Publication: 2026-02-06 17:10:02 UTC
+Date/Publication: 2026-08-21 19:10:08 UTC
